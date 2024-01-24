@@ -1,0 +1,48 @@
+pipeline
+{
+    agent any
+    stages
+    {
+        stage('git hub code')
+        {
+            steps
+            {
+                git url: 'https://github.com/AbeerSaxena2307/DevOpsClassCodes'
+                echo 'git checkout'
+            }
+            
+        }
+        stage('compile')
+        {
+            steps
+            {
+                echo 'compiling'
+                sh 'mvn compile'
+            }
+        }
+         stage('test')
+        {
+            steps
+            {
+                echo 'testing'
+                sh 'mvn test'
+            }
+        }
+         stage('QA')
+        {
+            steps
+            {
+                echo 'QA'
+                sh 'mvn checkstyle:checkstyle'
+            }
+        }
+         stage('package')
+        {
+            steps
+            {
+                echo 'package'
+                sh 'mvn package'
+            }
+        }
+    }
+}
